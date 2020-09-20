@@ -39,7 +39,7 @@ module.exports = {
     console.log('got request for favorite movies');
     return movieModel.findAll()
       .then((response) => {
-        console.log('get favorites db response', response)
+        console.log('get favorites db response')
         res.status(200).send(response)
       })
       .catch((error) => {
@@ -48,10 +48,10 @@ module.exports = {
       })
   },
   saveMovie: (req, res) => {
-    console.log('save movies request', req.body);
+    console.log('save movies request');
     return movieModel.save(req.body)
       .then((response) => {
-        console.log('save favorite movie db response', response)
+        console.log('save favorite movie db response')
         res.sendStatus(200)
       })
       .catch((error) => {
@@ -63,7 +63,7 @@ module.exports = {
     console.log('got request to delete movies', req.query);
     return movieModel.delete(req.query.movieId)
       .then((response) => {
-        console.log('delete favorite db response', response)
+        console.log('delete favorite db response')
         res.sendStatus(200)
       })
       .catch((error) => {
