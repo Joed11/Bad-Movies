@@ -29,7 +29,7 @@ class Search extends React.Component {
 
   handleSearchClick() {
     var genreId = document.getElementById('select-genre').value;
-    console.log('genreId gathered from select element', genreId)
+    console.log('genreId gathered from select element', genreId);
     this.props.getMovies(genreId);
   }
 
@@ -45,7 +45,6 @@ class Search extends React.Component {
         </select>
         <br/><br/>
         <button onClick={this.handleSearchClick}>Search</button>
-
       </div>
     );
   }
