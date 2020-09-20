@@ -1,10 +1,33 @@
 //Select one db to work with:
 
 //For SQL
-const sqlDb = require('../../db/sql');
+const {FavoriteMovies} = require('../../db/sql');
 //For Mongo
-const mongoDb = require('../../db/mongodb')
+//const mongoDb = require('../../db/mongodb')
 
 module.exports = {
+  save: (movie) => {
+    return FavoriteMovies.findOrCreate({
+      where: {
+        id: movie.id,
+        title: movie.title,
+        popularity: movie.popularity,
+        overview: movie.overview,
+        release_date: movie['release_date'],
+        thumbnail: movie['poster_path']
+      }
+    })
+  },
 
+  delete: (movie) => {
+    return FavoriteMovies.destroy({
+      where: {
+        id: movie.id,
+      }
+    })
+  },
+
+  findAll: () => {
+    return FavoriteMovies.findAll();
+  }
 }
