@@ -31,7 +31,7 @@ var FavoriteMovies = badmovieDB.define('favoriteMovieList', {
     allowNull: false,
   },
   overview: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
   },
   release_date: {
