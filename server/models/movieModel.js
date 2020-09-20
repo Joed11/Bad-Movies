@@ -19,10 +19,10 @@ module.exports = {
     })
   },
 
-  delete: (movie) => {
+  delete: (movieId) => {
     return FavoriteMovies.destroy({
       where: {
-        id: movie.id,
+        id: movieId,
       }
     })
   },
