@@ -48,8 +48,8 @@ module.exports = {
       })
   },
   saveMovie: (req, res) => {
-    console.log('save movies request');
-    return movieModel.save(req.data)
+    console.log('save movies request', req.body);
+    return movieModel.save(req.body)
       .then((response) => {
         console.log('save favorite movie db response', response)
         res.sendStatus(200)
@@ -60,8 +60,8 @@ module.exports = {
       })
   },
   deleteMovie: (req, res) => {
-    console.log('got request to delete movies');
-    return movieModel.delete(req.query.id)
+    console.log('got request to delete movies', req.query);
+    return movieModel.delete(req.query.movieId)
       .then((response) => {
         console.log('delete favorite db response', response)
         res.sendStatus(200)
