@@ -32,7 +32,8 @@ class App extends React.Component {
      .then((response) => {
        console.log('get movie response', response.data);
        this.setState({
-         movies: response.data.results
+         movies: response.data.results,
+         showFaves: false
        })
      })
      .catch((err) => {
@@ -46,7 +47,7 @@ class App extends React.Component {
      .then((response) => {
        console.log('favorite movie response', response.data);
        this.setState({
-         favorites: response.data
+         favorites: response.data,
        })
      })
      .catch((err) => {
@@ -82,7 +83,11 @@ class App extends React.Component {
   //dont touch
     this.setState({
       showFaves: !this.state.showFaves
-    }, this.getFavorites())
+    }, () => {
+      if (this.state.showFaves === true) {
+        this.getFavorites();
+      }
+    })
   }
 
   render () {
