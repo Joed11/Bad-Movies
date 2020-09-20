@@ -4,7 +4,16 @@ const apiHelpers = require('../helpers/apiHelpers.js');
 //Return requests to the client
 module.exports = {
   getSearch: (req, res) => {
-    // get the search genre     
+    console.log('genre id request from client', req.query.id)
+    apiHelpers.getBadMoviesByGenre(req.query.id)
+      .then((response) => {
+        res.status(200).send(response.data)
+      })
+      .catch((error) => {
+        console.log('error getting movies from api', error);
+        res.status(404).send('Could not get movie list');
+      })
+    // get the search genre
 
     // https://www.themoviedb.org/account/signup
     // get your API KEY
@@ -16,16 +25,50 @@ module.exports = {
     // and sort them by horrible votes using the search parameters in the API
   },
   getGenres: (req, res) => {
-    // make an axios request to get the list of official genres
-    
-    // use this endpoint, which will also require your API key: https://api.themoviedb.org/3/genre/movie/list
-    
-    // send back
+    apiHelpers.getGenres()
+      .then((response) => {
+        console.log('api genre response')
+        res.status(200).send(response.data)
+      })
+      .catch((error) => {
+        console.log('error getting genres from api', error);
+        res.status(404).send('Could not get genre list');
+      })
+  },
+  getFavorites: (req, res) => {
+    console.log('got request for favorite movies');
+    return movieModel.findAll()
+      .then((response) => {
+        console.log('get favorites db response', response)
+        res.status(200).send(response)
+      })
+      .catch((error) => {
+        console.log('error getting favorites from db', error);
+        res.status(404).send('Could not retrieve favorites from db');
+      })
   },
   saveMovie: (req, res) => {
-
+    console.log('save movies request');
+    return movieModel.save(req.data)
+      .then((response) => {
+        console.log('save favorite movie db response', response)
+        res.sendStatus(200)
+      })
+      .catch((error) => {
+        console.log('error saving movie to db', error);
+        res.status(500).send('Could not save movie to db');
+      })
   },
   deleteMovie: (req, res) => {
-
+    console.log('got request to delete movies');
+    return movieModel.delete(req.query.id)
+      .then((response) => {
+        console.log('delete favorite db response', response)
+        res.sendStatus(200)
+      })
+      .catch((error) => {
+        console.log('error deleting from db', error);
+        res.status(500).send('Could not delete from db');
+      })
   }
 }
